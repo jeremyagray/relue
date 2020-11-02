@@ -1,0 +1,39 @@
+{
+  "name": "relue",
+  "homepage": "https://github.com/jeremyagray/relue",
+  "author": "Jeremy A Gray <jeremy.a.gray@gmail.com> (http://www.grayfarms.org/)",
+  "version": "0.0.1",
+  "description": "Small helper functions for Euler projects, Rosetta Code, text, math, and more.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive --exit tests/",
+    "lint": "eslint '**/*.js'"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeremyagray/relue.git"
+  },
+  "keywords": [
+    "euler",
+    "math",
+    "node",
+    "rosetta",
+    "text"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeremyagray/relue/issues"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^7.12.0",
+    "mocha": "^8.2.0",
+    "nyc": "^15.1.0"
+  }
+}
