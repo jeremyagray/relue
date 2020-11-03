@@ -2,9 +2,17 @@
 
 const chai = require('chai');
 const assert = chai.assert;
-const util = require('../../../lib/relue/text/mongoose.js');
+
+const relue = require('../../../index.js');
+
+console.log(relue);
 
 suite('relue.text.maybeMongoObjectId()', function() {
+  test('relue.text.maybeMongoObjectId() is a function', function(done) {
+    assert.equal(typeof relue.text.maybeMongoObjectId, 'function', 'relue.text.maybeMongoObjectId should be a function.');
+    done();
+  });
+
   test('relue.text.maybeMongoObjectId(), invalid id, null', function(done) {
     assert.isFalse(relue.text.maybeMongoObjectId(null));
     done();

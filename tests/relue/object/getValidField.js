@@ -2,12 +2,17 @@
 
 const chai = require('chai');
 const assert = chai.assert;
-const util = require('../../../lib/relue/object/fields.js');
+
+const relue = require('../../../index.js');
 
 suite('relue.object.getValidField()', function() {
+  test('relue.object.getValidField() is a function', function(done) {
+    assert.equal(typeof relue.object.getValidField, 'function', 'relue.object.getValidField should be a function.');
+    done();
+  });
+
   test('relue.object.getValidField() on empty object', function(done) {
     assert.isNull(relue.object.getValidField('', {}), 'Empty object should return null.');
-
     done();
   });
 
@@ -18,7 +23,6 @@ suite('relue.object.getValidField()', function() {
       'error':  ''
     };
     assert.isNull(relue.object.getValidField('error', json), 'A field with an empty string should return null.');
-
     done();
   });
 
@@ -29,7 +33,6 @@ suite('relue.object.getValidField()', function() {
       'error':  null
     };
     assert.isNull(relue.object.getValidField('error', json), 'A field with null should return null.');
-
     done();
   });
 
@@ -40,7 +43,6 @@ suite('relue.object.getValidField()', function() {
       'error':  undefined
     };
     assert.isNull(relue.object.getValidField('error', json), 'A field with undefined should return null.');
-
     done();
   });
 

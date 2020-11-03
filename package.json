@@ -6,8 +6,9 @@
   "description": "Small helper functions for Euler projects, Rosetta Code, text, math, and more.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --exit tests/",
-    "lint": "eslint '**/*.js'"
+    "cover": "nyc --reporter=text --reporter=html  mocha --recursive --exit -ui tdd tests/",
+    "lint": "eslint '**/*.js'",
+    "test": "mocha --recursive --exit -ui tdd tests/"
   },
   "engines": {
     "node": ">=12.0.0"

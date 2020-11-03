@@ -4,7 +4,7 @@ Small helper functions for the Euler project, Rosetta Code, text, math, and othe
 
 ## What is Relue?
 
-Relue is a suite of small helper functions for all kinds of tasks.  The functions are short, thoroughly tested, and hopefully, reliably correct.
+Relue is a suite of small helper functions for all kinds of tasks.  The functions are short, thoroughly tested, and hopefully, reliably correct.  All functions are pure functions if possible.
 
 ## Installation
 

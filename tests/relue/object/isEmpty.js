@@ -2,9 +2,15 @@
 
 const chai = require('chai');
 const assert = chai.assert;
-const util = require('../../../lib/relue/object/fields.js');
+
+const relue = require('../../../index.js');
 
 suite('relue.object.isEmpty() tests', function() {
+  test('relue.object.isEmpty() is a function', function(done) {
+    assert.equal(typeof relue.object.isEmpty, 'function', 'relue.object.isEmpty should be a function.');
+    done();
+  });
+
   test('relue.object.isEmpty() on empty object', function(done) {
     assert.isTrue(relue.object.isEmpty({}), 'Empty object is empty.');
     done();
