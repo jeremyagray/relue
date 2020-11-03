@@ -5,8 +5,6 @@ const assert = chai.assert;
 
 const relue = require('../../../index.js');
 
-console.log(relue);
-
 suite('relue.text.maybeMongoObjectId()', function() {
   test('relue.text.maybeMongoObjectId() is a function', function(done) {
     assert.equal(typeof relue.text.maybeMongoObjectId, 'function', 'relue.text.maybeMongoObjectId should be a function.');
