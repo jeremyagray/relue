@@ -8,6 +8,7 @@
   "scripts": {
     "cover": "nyc --reporter=text --reporter=html  mocha --recursive --exit -ui tdd tests/",
     "lint": "eslint '**/*.js'",
+    "lint-fix": "eslint --fix '**/*.js'",
     "test": "mocha --recursive --exit -ui tdd tests/"
   },
   "engines": {
