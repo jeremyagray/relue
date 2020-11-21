@@ -91,7 +91,7 @@ suite('relue.math.isPrime()', function() {
   });
 
   test('relue.math.isPrime(), prime integers', function(done) {
-    const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+    const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
     for (let i = 0; i < primes.length; i++) {
       assert.isTrue(relue.math.isPrime(primes[i]),
                     'Prime integers are prime.');

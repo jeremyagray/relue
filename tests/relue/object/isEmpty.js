@@ -47,7 +47,8 @@ suite('relue.object.isEmpty() tests', function() {
   });
 
   test('relue.object.isEmpty() on non-empty object', function(done) {
-    assert.isFalse(relue.object.isEmpty({'key': 'value'}), 'An object with properties is not empty.');
+    assert.isFalse(relue.object.isEmpty({'key': 'value'}),
+                   'An object with properties is not empty.');
     done();
   });
 });
