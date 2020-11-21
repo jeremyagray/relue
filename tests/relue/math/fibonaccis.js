@@ -12,7 +12,7 @@ suite('relue.math.fibonaccis()', function() {
   });
 
   test('relue.math.fibonaccis(), first ten', function(done) {
-    const fibos = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+    const fibos = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34];
     const generator = relue.math.fibonaccis();
     
     for (let i = 0; i < fibos.length; i++) {
