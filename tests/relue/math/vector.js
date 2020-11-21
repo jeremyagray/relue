@@ -136,7 +136,7 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector.addition() length checks', function(done) {
+  test('class relue.math.Vector.add() length checks', function(done) {
     let one = new relue.math.Vector([0, 1]);
     let two = new relue.math.Vector([0, 0, 1]);
     let msg = 'Vector lengths should match for addition.';
@@ -147,7 +147,21 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector.add(), integers', function(done) {
+  test('class relue.math.Vector.add() zero vectors', function(done) {
+    let two = new relue.math.Vector([0, 1]);
+    let zero = new relue.math.Vector([0, 0]);
+    let three = new relue.math.Vector([0, 0, 1]);
+    const msg = 'The zero vector is the additive identity.';
+    
+    assert.isTrue(two.equal(two.add(zero)), msg);
+
+    zero = new relue.math.Vector([0, 0, 0]);
+    assert.isTrue(three.equal(three.add(zero)), msg);
+
+    done();
+  });
+
+  test('class relue.math.Vector.add() integers', function(done) {
     const msg = 'Elements should be equal.';
 
     for (let i = 0; i < 100; i++) {
@@ -178,7 +192,7 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector.add(), floats', function(done) {
+  test('class relue.math.Vector.add() floats', function(done) {
     const msg = 'Elements should be equal.';
 
     for (let i = 0; i < 100; i++) {
@@ -221,6 +235,20 @@ suite('class relue.math.Vector', function() {
          done();
        });
 
+  test('class relue.math.Vector.subtract() zero vectors', function(done) {
+    let two = new relue.math.Vector([0, 1]);
+    let zero = new relue.math.Vector([0, 0]);
+    let three = new relue.math.Vector([0, 0, 1]);
+    const msg = 'The zero vector is the subtractive identity.';
+    
+    assert.isTrue(two.equal(two.subtract(zero)), msg);
+
+    zero = new relue.math.Vector([0, 0, 0]);
+    assert.isTrue(three.equal(three.subtract(zero)), msg);
+
+    done();
+  });
+
   test('class relue.math.Vector.subtraction() integers', function(done) {
     const msg = 'Elements should be equal.';
     
@@ -252,7 +280,7 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector, float subtraction', function(done) {
+  test('class relue.math.Vector.subtraction() floats', function(done) {
     const msg = 'Elements should be equal.';
     
     for (let i = 0; i < 100; i++) {
@@ -287,7 +315,7 @@ suite('class relue.math.Vector', function() {
        function(done) {
          let one = new relue.math.Vector([0, 1]);
          let two = new relue.math.Vector([0, 0, 1]);
-         let msg = 'Vector lengths should match for dot product.';
+         const msg = 'Vector lengths should match for dot product.';
          
          assert.isNull(one.dot(two), msg);
          assert.isNull(two.dot(one), msg);
@@ -295,77 +323,79 @@ suite('class relue.math.Vector', function() {
          done();
        });
 
-  test('class relue.math.Vector, unit vector dot products',
+  test('class relue.math.Vector.dot() zero vectors', function(done) {
+    const msg = 'The zero vector is the multiplicative zero.';
+    let zero, two, three;
+    let actual, expected;
+
+    zero = new relue.math.Vector([0, 0]);
+    two = new relue.math.Vector([0, 1]);
+    expected = 0;
+    actual = two.dot(zero);
+    assert.equal(actual, expected, msg);
+
+    actual = zero.dot(two);
+    assert.equal(actual, expected, msg);
+
+    zero = new relue.math.Vector([0, 0, 0]);
+    three = new relue.math.Vector([0, 0, 1]);
+    actual = three.dot(zero);
+    assert.equal(actual, expected, msg);
+
+    actual = zero.dot(three);
+    assert.equal(actual, expected, msg);
+
+    done();
+  });
+
+  test('class relue.math.Vector.dot() unit vectors',
        function(done) {
-         let one = new relue.math.Vector([1, 0]);
-         let two = new relue.math.Vector([0, 1]);
-         let actual = one.dot(two);
-         let expected = 0;
-         let msg = 'Expected dot products should equal.';
-         
-         assert.equal(actual,
-                      expected,
-                      msg);
+         const msg = 'Expected dot products should equal.';
+         let one, two, three;
+         let actual, expected;
+
+         one = new relue.math.Vector([1, 0]);
+         two = new relue.math.Vector([0, 1]);
+         actual = one.dot(two);
+         expected = 0;
+         assert.equal(actual, expected, msg);
 
          actual = two.dot(one);
-
-         assert.equal(actual,
-                      expected,
-                      msg);
+         assert.equal(actual, expected, msg);
 
          one = new relue.math.Vector([1, 0, 0]);
          two = new relue.math.Vector([0, 1, 0]);
-         let three = new relue.math.Vector([0, 0, 1]);
+         three = new relue.math.Vector([0, 0, 1]);
          actual = one.dot(two);
-         
-         assert.equal(actual,
-                      expected,
-                      msg);
+         assert.equal(actual, expected, msg);
 
          actual = two.dot(three);
-         
-         assert.equal(actual,
-                      expected,
-                      msg);
+         assert.equal(actual, expected, msg);
 
          actual = one.dot(three);
-         
-         assert.equal(actual,
-                      expected,
-                      msg);
+         assert.equal(actual, expected, msg);
 
          actual = three.dot(one);
-         
-         assert.equal(actual,
-                      expected,
-                      msg);
+         assert.equal(actual, expected, msg);
 
          actual = two.dot(three);
-         
-         assert.equal(actual,
-                      expected,
-                      msg);
+         assert.equal(actual, expected, msg);
 
          actual = three.dot(two);
-         
-         assert.equal(actual,
-                      expected,
-                      msg);
+         assert.equal(actual, expected, msg);
 
          done();
        });
 
-  test('class relue.math.Vector, integer dot products', function(done) {
-    let one = [];
-    let two = [];
-    let dot = 0;
-    let msg = 'Elements should be equal.';
+  test('class relue.math.Vector.dot() integers', function(done) {
+    const msg = 'Elements should be equal.';
     
     for (let i = 0; i < 100; i++) {
       const length = relue.math.randomInteger(2, 10);
-      one = [];
-      two = [];
-      dot = 0;
+      let one = [];
+      let two = [];
+      let dot = 0;
+
       for (let j = 0; j < length; j++) {
         let a = relue.math.randomInteger(-100, 100);
         let b = relue.math.randomInteger(-100, 100);
@@ -379,28 +409,22 @@ suite('class relue.math.Vector', function() {
       let dotOne = oneV.dot(twoV);
       let dotTwo = twoV.dot(oneV);
 
-      assert.equal(dotOne,
-                   dot,
-                   msg);
-      assert.equal(dotTwo,
-                   dot,
-                   msg);
+      assert.equal(dotOne, dot, msg);
+      assert.equal(dotTwo, dot, msg);
     }
 
     done();
   });
 
-  test('class relue.math.Vector, float dot products', function(done) {
-    let one = [];
-    let two = [];
-    let dot = 0;
-    let msg = 'Elements should be equal.';
+  test('class relue.math.Vector.dot() floats', function(done) {
+    const msg = 'Elements should be equal.';
     
     for (let i = 0; i < 100; i++) {
       const length = relue.math.randomInteger(2, 10);
-      one = [];
-      two = [];
-      dot = 0;
+      let one = [];
+      let two = [];
+      let dot = 0;
+
       for (let j = 0; j < length; j++) {
         let a = relue.math.randomBetween(-100, 100);
         let b = relue.math.randomBetween(-100, 100);
@@ -414,114 +438,118 @@ suite('class relue.math.Vector', function() {
       let dotOne = oneV.dot(twoV);
       let dotTwo = twoV.dot(oneV);
 
-      assert.equal(dotOne,
-                   dot,
-                   msg);
-      assert.equal(dotTwo,
-                   dot,
-                   msg);
+      assert.equal(dotOne, dot, msg);
+      assert.equal(dotTwo, dot, msg);
     }
 
     done();
   });
 
-  test('class relue.math.Vector, mis-matched length orthogonality',
+  test('class relue.math.Vector.isOrthogonal() length checks',
        function(done) {
          let one = new relue.math.Vector([0, 1]);
          let two = new relue.math.Vector([0, 0, 1]);
-         let msg = 'Vector lengths should match for orthogonality.';
+         const msg = 'Vector lengths should match for orthogonality.';
          
-         assert.isNull(one.isOrthogonal(two),
-                       msg);
-         assert.isNull(two.isOrthogonal(one),
-                       msg);
+         assert.isNull(one.isOrthogonal(two), msg);
+         assert.isNull(two.isOrthogonal(one), msg);
 
          done();
        });
 
-  test('class relue.math.Vector, unit vector orthogonality',
+  test('class relue.math.Vector.isOrthogonal() zero vectors',
        function(done) {
-         let one = new relue.math.Vector([1, 0]);
-         let two = new relue.math.Vector([0, 1]);
-         let actual = one.isOrthogonal(two);
-         let msg = 'Unit vectors should be orthogonal.';
-         let msgFalse = 'A vector should not be orthogonal to itself.';
-         
-         assert.isTrue(actual,
-                       msg);
+         const good = 'Zero vectors should not be orthogonal.';
+         let zero, two, three;
+         let actual;
+
+         zero = new relue.math.Vector([0, 0]);
+         two = new relue.math.Vector([0, 1]);
+         actual = zero.isOrthogonal(two);
+         assert.isTrue(actual, good);
+
+         actual = two.isOrthogonal(zero);
+         assert.isTrue(actual, good);
+
+         zero = new relue.math.Vector([0, 0, 0]);
+         three = new relue.math.Vector([0, 0, 1]);
+
+         actual = zero.isOrthogonal(three);
+         assert.isTrue(actual, good);
+
+         actual = three.isOrthogonal(zero);
+         assert.isTrue(actual, good);
+
+         done();
+       });
+
+  test('class relue.math.Vector.isOrthogonal() unit vectors',
+       function(done) {
+         const good = 'Unit vectors should be orthogonal.';
+         const bad = 'A vector should not be orthogonal to itself.';
+         let one, two, three;
+         let actual;
+
+         one = new relue.math.Vector([1, 0]);
+         two = new relue.math.Vector([0, 1]);
+         actual = one.isOrthogonal(two);
+         assert.isTrue(actual, good);
 
          actual = two.isOrthogonal(one);
-
-         assert.isTrue(actual,
-                       msg);
+         assert.isTrue(actual, good);
 
          actual = one.isOrthogonal(one);
-
-         assert.isFalse(actual,
-                        msgFalse);
+         assert.isFalse(actual, bad);
 
          actual = two.isOrthogonal(two);
-
-         assert.isFalse(actual,
-                        msgFalse);
+         assert.isFalse(actual, bad);
 
          one = new relue.math.Vector([1, 0, 0]);
          two = new relue.math.Vector([0, 1, 0]);
-         let three = new relue.math.Vector([0, 0, 1]);
+         three = new relue.math.Vector([0, 0, 1]);
 
          actual = one.isOrthogonal(two);
-         assert.isTrue(actual,
-                       msg);
+         assert.isTrue(actual, good);
 
          actual = two.isOrthogonal(three);
-         assert.isTrue(actual,
-                       msg);
+         assert.isTrue(actual, good);
 
          actual = one.isOrthogonal(three);
-         assert.isTrue(actual,
-                       msg);
+         assert.isTrue(actual, good);
 
          actual = three.isOrthogonal(one);
-         assert.isTrue(actual,
-                       msg);
+         assert.isTrue(actual, good);
 
          actual = two.isOrthogonal(three);
-         assert.isTrue(actual,
-                       msg);
+         assert.isTrue(actual, good);
 
          actual = three.isOrthogonal(two);
-         assert.isTrue(actual,
-                       msg);
+         assert.isTrue(actual, good);
 
          actual = one.isOrthogonal(one);
-         assert.isFalse(actual,
-                        msgFalse);
+         assert.isFalse(actual, bad);
 
          actual = two.isOrthogonal(two);
-         assert.isFalse(actual,
-                        msgFalse);
+         assert.isFalse(actual, bad);
 
          actual = three.isOrthogonal(three);
-         assert.isFalse(actual,
-                        msgFalse);
+         assert.isFalse(actual, bad);
 
          done();
        });
 
-  test('class relue.math.Vector.projection(), length checks', function(done) {
+  test('class relue.math.Vector.projection() length checks', function(done) {
     let one = new relue.math.Vector([0, 1]);
     let two = new relue.math.Vector([0, 0, 1]);
-    let msg = 'Vector lengths should match for dot product.';
+    const msg = 'Vector lengths should match for dot product.';
     
-    assert.isNull(one.projection(two),
-                  msg);
-    assert.isNull(two.projection(one),
-                  msg);
+    assert.isNull(one.projection(two), msg);
+    assert.isNull(two.projection(one), msg);
 
     done();
   });
 
-  test('class relue.math.Vector.projection(), zero vectors', function(done) {
+  test('class relue.math.Vector.projection() zero vectors', function(done) {
     const msg = 'Zero vector projections should equal the zero vector.';
     let one, three, zero;
     let actual;
@@ -547,7 +575,7 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector.projection(), unit vectors', function(done) {
+  test('class relue.math.Vector.projection() unit vectors', function(done) {
     const msg = 'Projections should be equal.';
     let one, two, three;
     let actual, expected;
@@ -614,8 +642,8 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector.projection(), integers', function(done) {
-    let msg = 'Projections should be equal.';
+  test('class relue.math.Vector.projection() integers', function(done) {
+    const msg = 'Projections should be equal.';
     
     for (let i = 0; i < 100; i++) {
       const length = relue.math.randomInteger(2, 10);
@@ -649,8 +677,8 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector.projection(), floats', function(done) {
-    let msg = 'Projections should be equal.';
+  test('class relue.math.Vector.projection() floats', function(done) {
+    const msg = 'Projections should be equal.';
     
     for (let i = 0; i < 100; i++) {
       const length = relue.math.randomInteger(2, 10);
@@ -684,11 +712,22 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector, magnitude', function(done) {
+  test('class relue.math.Vector.magnitude()', function(done) {
     const msg = 'Magnitudes values should equal.';
     let actual, expected;
+    let zero, one;
 
-    let one = new relue.math.Vector([3, 4]);
+    zero = new relue.math.Vector([0, 0]);
+    actual = zero.magnitude();
+    expected = 0;
+    assert.equal(actual, expected, msg);
+    
+    zero = new relue.math.Vector([0, 0, 0]);
+    actual = zero.magnitude();
+    expected = 0;
+    assert.equal(actual, expected, msg);
+    
+    one = new relue.math.Vector([3, 4]);
     actual = one.magnitude();
     expected = 5;
     assert.equal(actual, expected, msg);
@@ -711,11 +750,19 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector, normalize', function(done) {
+  test('class relue.math.Vector.normalize()', function(done) {
     const msg = 'Normalized vector elements should be equal.';
+    const zeroMsg = 'Zero vectors do not normalize.';
     let actual, expected;
+    let zero, one;
 
-    let one = new relue.math.Vector([1, 0]);
+    zero = new relue.math.Vector([0, 0]);
+    assert.isNull(zero.normalize(), zeroMsg);
+    
+    zero = new relue.math.Vector([0, 0, 0]);
+    assert.isNull(zero.normalize(), zeroMsg);
+    
+    one = new relue.math.Vector([1, 0]);
     actual = one.normalize();
     expected = new relue.math.Vector([1, 0]);
     for (let i = 0; i < one.length; i++) {
@@ -774,41 +821,44 @@ suite('class relue.math.Vector', function() {
     done();
   });
 
-  test('class relue.math.Vector, cross product length checks', function(done) {
+  test('class relue.math.Vector.cross() length checks', function(done) {
     let two = new relue.math.Vector([0, 1]);
     let three = new relue.math.Vector([0, 0, 1]);
     let four = new relue.math.Vector([0, 0, 0, 1]);
     const msg = 'Vector lengths should be three for cross products.';
     
-    assert.isNull(two.cross(two),
-                  msg);
-    assert.isNull(two.cross(three),
-                  msg);
-    assert.isNull(two.cross(four),
-                  msg);
-    assert.isNull(three.cross(two),
-                  msg);
-    assert.isNotNull(three.cross(three),
-                     msg);
-    assert.isNull(three.cross(four),
-                  msg);
-    assert.isNull(four.cross(two),
-                  msg);
-    assert.isNull(four.cross(three),
-                  msg);
-    assert.isNull(four.cross(four),
-                  msg);
+    assert.isNull(two.cross(two), msg);
+    assert.isNull(two.cross(three), msg);
+    assert.isNull(two.cross(four), msg);
+    assert.isNull(three.cross(two), msg);
+    assert.isNotNull(three.cross(three), msg);
+    assert.isNull(three.cross(four), msg);
+    assert.isNull(four.cross(two), msg);
+    assert.isNull(four.cross(three), msg);
+    assert.isNull(four.cross(four), msg);
     
     done();
   });
 
-  test('class relue.math.Vector, integer cross products', function(done) {
-    let msg = 'Elements should be equal.';
+  test('class relue.math.Vector.cross() zero vectors', function(done) {
+    let zero = new relue.math.Vector([0, 0, 0]);
+    let one = new relue.math.Vector([1, 0, 0]);
+    const msg = 'Cross products with zero vectors should be zero vectors.';
+    
+    assert.isTrue(zero.equal(zero.cross(one)), msg);
+    assert.isTrue(zero.equal(one.cross(zero)), msg);
+    
+    done();
+  });
+
+  test('class relue.math.Vector.cross() integers', function(done) {
+    const msg = 'Elements should be equal.';
     
     for (let i = 0; i < 100; i++) {
       const length = 3;
       let one = [];
       let two = [];
+
       for (let j = 0; j < length; j++) {
         let a = relue.math.randomInteger(-100, 100);
         let b = relue.math.randomInteger(-100, 100);
@@ -832,25 +882,22 @@ suite('class relue.math.Vector', function() {
       ]);
 
       for (let j = 0; j < length; j++) {
-        assert.equal(crossOne.elements[j],
-                     crossOneExpected.elements[j],
-                     msg);
-        assert.equal(crossTwo.elements[j],
-                     crossTwoExpected.elements[j],
-                     msg);
+        assert.equal(crossOne.elements[j], crossOneExpected.elements[j], msg);
+        assert.equal(crossTwo.elements[j], crossTwoExpected.elements[j], msg);
       }
     }
 
     done();
   });
 
-  test('class relue.math.Vector, float cross products', function(done) {
-    let msg = 'Elements should be equal.';
+  test('class relue.math.Vector.cross() floats', function(done) {
+    const msg = 'Elements should be equal.';
     
     for (let i = 0; i < 100; i++) {
       const length = 3;
       let one = [];
       let two = [];
+
       for (let j = 0; j < length; j++) {
         let a = relue.math.randomBetween(-100, 100);
         let b = relue.math.randomBetween(-100, 100);
@@ -874,19 +921,15 @@ suite('class relue.math.Vector', function() {
       ]);
 
       for (let j = 0; j < length; j++) {
-        assert.equal(crossOne.elements[j],
-                     crossOneExpected.elements[j],
-                     msg);
-        assert.equal(crossTwo.elements[j],
-                     crossTwoExpected.elements[j],
-                     msg);
+        assert.equal(crossOne.elements[j], crossOneExpected.elements[j], msg);
+        assert.equal(crossTwo.elements[j], crossTwoExpected.elements[j], msg);
       }
     }
 
     done();
   });
 
-  test('class relue.math.Vector, scalar triple product length checks',
+  test('class relue.math.Vector.scalarTriple() length checks',
        function(done) {
          let two = new relue.math.Vector([0, 1]);
          let three = new relue.math.Vector([0, 0, 1]);
@@ -894,31 +937,55 @@ suite('class relue.math.Vector', function() {
          const msg =
                'Vector lengths should be three for scalar triple products.';
          
-         assert.isNull(two.scalarTriple(three, four),
-                       msg);
-         assert.isNull(two.scalarTriple(four, three),
-                       msg);
-         assert.isNull(three.scalarTriple(two, four),
-                       msg);
-         assert.isNull(three.scalarTriple(four, two),
-                       msg);
-         assert.isNull(four.scalarTriple(two, three),
-                       msg);
-         assert.isNull(four.scalarTriple(three, two),
-                       msg);
+         assert.isNull(two.scalarTriple(three, four), msg);
+         assert.isNull(two.scalarTriple(four, three), msg);
+         assert.isNull(three.scalarTriple(two, four), msg);
+         assert.isNull(three.scalarTriple(four, two), msg);
+         assert.isNull(four.scalarTriple(two, three), msg);
+         assert.isNull(four.scalarTriple(three, two), msg);
          
          done();
        });
 
-  test('class relue.math.Vector, integer scalar triple products',
+  test('class relue.math.Vector.scalarTriple() zero vectors', function(done) {
+    let actual, expected = 0;
+    let zero = new relue.math.Vector([0, 0, 0]);
+    let one = new relue.math.Vector([1, 0, 0]);
+    let two = new relue.math.Vector([0, 1, 0]);
+    const msg =
+          'Scalar triple products with zero vectors should be zero vectors.';
+    
+    actual = zero.scalarTriple(one, two);
+    assert.equal(actual, expected, msg);
+
+    actual = zero.scalarTriple(two, one);
+    assert.equal(actual, expected, msg);
+
+    actual = one.scalarTriple(two, zero);
+    assert.equal(actual, expected, msg);
+
+    actual = one.scalarTriple(zero, two);
+    assert.equal(actual, expected, msg);
+
+    actual = two.scalarTriple(zero, one);
+    assert.equal(actual, expected, msg);
+
+    actual = two.scalarTriple(one, zero);
+    assert.equal(actual, expected, msg);
+    
+    done();
+  });
+
+  test('class relue.math.Vector.scalarTriple() integers',
        function(done) {
-         let msg = 'Scalar triple products should be equal.';
+         const msg = 'Scalar triple products should be equal.';
          
          for (let i = 0; i < 100; i++) {
            const length = 3;
            let one = [];
            let two = [];
            let three = [];
+
            for (let j = 0; j < length; j++) {
              let a = relue.math.randomInteger(-100, 100);
              let b = relue.math.randomInteger(-100, 100);
@@ -957,21 +1024,21 @@ suite('class relue.math.Vector', function() {
            actual = threeV.scalarTriple(twoV, oneV);
            expected = threeV.dot(twoV.cross(oneV));
            assert.equal(actual, expected, msg);
-
          }
 
          done();
        });
 
-  test('class relue.math.Vector.scalarTriple(), floats',
+  test('class relue.math.Vector.scalarTriple() floats',
        function(done) {
-         let msg = 'Scalar triple products should be equal.';
+         const msg = 'Scalar triple products should be equal.';
          
          for (let i = 0; i < 100; i++) {
            const length = 3;
            let one = [];
            let two = [];
            let three = [];
+
            for (let j = 0; j < length; j++) {
              let a = relue.math.randomBetween(-100, 100);
              let b = relue.math.randomBetween(-100, 100);
@@ -1010,13 +1077,12 @@ suite('class relue.math.Vector', function() {
            actual = threeV.scalarTriple(twoV, oneV);
            expected = threeV.dot(twoV.cross(oneV));
            assert.equal(actual, expected, msg);
-
          }
 
          done();
        });
 
-  test('class relue.math.Vector.vectorTriple(), length checks',
+  test('class relue.math.Vector.vectorTriple() length checks',
        function(done) {
          let two = new relue.math.Vector([0, 1]);
          let three = new relue.math.Vector([0, 0, 1]);
@@ -1024,31 +1090,43 @@ suite('class relue.math.Vector', function() {
          const msg =
                'Vector lengths should be three for vector triple products.';
          
-         assert.isNull(two.vectorTriple(three, four),
-                       msg);
-         assert.isNull(two.vectorTriple(four, three),
-                       msg);
-         assert.isNull(three.vectorTriple(two, four),
-                       msg);
-         assert.isNull(three.vectorTriple(four, two),
-                       msg);
-         assert.isNull(four.vectorTriple(two, three),
-                       msg);
-         assert.isNull(four.vectorTriple(three, two),
-                       msg);
+         assert.isNull(two.vectorTriple(three, four), msg);
+         assert.isNull(two.vectorTriple(four, three), msg);
+         assert.isNull(three.vectorTriple(two, four), msg);
+         assert.isNull(three.vectorTriple(four, two), msg);
+         assert.isNull(four.vectorTriple(two, three), msg);
+         assert.isNull(four.vectorTriple(three, two), msg);
          
          done();
        });
 
-  test('class relue.math.Vector.vectorTriple(), integers',
+  test('class relue.math.Vector.vectorTriple() zero vectors', function(done) {
+    let zero = new relue.math.Vector([0, 0, 0]);
+    let one = new relue.math.Vector([1, 0, 0]);
+    let two = new relue.math.Vector([0, 1, 0]);
+    const msg =
+          'Vector triple products with zero vectors should be zero vectors.';
+    
+    assert.isTrue(zero.equal(zero.vectorTriple(one, two)), msg);
+    assert.isTrue(zero.equal(zero.vectorTriple(two, one)), msg);
+    assert.isTrue(zero.equal(one.vectorTriple(two, zero)), msg);
+    assert.isTrue(zero.equal(one.vectorTriple(zero, two)), msg);
+    assert.isTrue(zero.equal(two.vectorTriple(zero, one)), msg);
+    assert.isTrue(zero.equal(two.vectorTriple(one, zero)), msg);
+    
+    done();
+  });
+
+  test('class relue.math.Vector.vectorTriple() integers',
        function(done) {
-         let msg = 'Vector triple products should be equal.';
+         const msg = 'Vector triple products should be equal.';
          
          for (let i = 0; i < 100; i++) {
            const length = 3;
            let one = [];
            let two = [];
            let three = [];
+
            for (let j = 0; j < length; j++) {
              let a = relue.math.randomInteger(-100, 100);
              let b = relue.math.randomInteger(-100, 100);
@@ -1087,21 +1165,21 @@ suite('class relue.math.Vector', function() {
            actual = threeV.vectorTriple(twoV, oneV);
            expected = threeV.cross(twoV.cross(oneV));
            assert.isTrue(actual.equal(expected), msg);
-
          }
 
          done();
        });
 
-  test('class relue.math.Vector.vectorTriple(), floats',
+  test('class relue.math.Vector.vectorTriple() floats',
        function(done) {
-         let msg = 'Vector triple products should be equal.';
+         const msg = 'Vector triple products should be equal.';
          
          for (let i = 0; i < 100; i++) {
            const length = 3;
            let one = [];
            let two = [];
            let three = [];
+
            for (let j = 0; j < length; j++) {
              let a = relue.math.randomBetween(-100, 100);
              let b = relue.math.randomBetween(-100, 100);
@@ -1140,19 +1218,27 @@ suite('class relue.math.Vector', function() {
            actual = threeV.vectorTriple(twoV, oneV);
            expected = threeV.cross(twoV.cross(oneV));
            assert.isTrue(actual.equal(expected), msg);
-
          }
 
          done();
        });
 
-  test('class relue.math.Vector, negation', function(done) {
+  test('class relue.math.Vector.negate()', function(done) {
     const msg = 'Elements should be opposites.';
+    const zeroMsg = 'Elements should be equal.';
+    let zero;
     
+    zero = new relue.math.Vector([0, 0]);
+    assert.isTrue(zero.equal(zero.negate()), zeroMsg);
+
+    zero = new relue.math.Vector([0, 0, 0]);
+    assert.isTrue(zero.equal(zero.negate()), zeroMsg);
+
     // Integers.
     for (let i = 0; i < 100; i++) {
       let one = [];
       const length = relue.math.randomInteger(2, 10);
+
       for (let j = 0; j < length; j++) {
         let a = relue.math.randomInteger(-100, 100);
         one.push(a);
@@ -1162,9 +1248,7 @@ suite('class relue.math.Vector', function() {
       let oneN = oneV.negate();
 
       for (let j = 0; j < length; j++) {
-        assert.equal(oneV.elements[j],
-                     -oneN.elements[j],
-                     msg);
+        assert.equal(oneV.elements[j], -oneN.elements[j], msg);
       }
     }
 
@@ -1181,9 +1265,7 @@ suite('class relue.math.Vector', function() {
       let oneN = oneV.negate();
 
       for (let j = 0; j < length; j++) {
-        assert.equal(oneV.elements[j],
-                     -oneN.elements[j],
-                     msg);
+        assert.equal(oneV.elements[j], -oneN.elements[j], msg);
       }
     }
 
@@ -1193,55 +1275,41 @@ suite('class relue.math.Vector', function() {
   test('class relue.math.Vector.toString()', function(done) {
     let two = new relue.math.Vector([0, 1]);
     let three = new relue.math.Vector([0, 0, 1]);
-    let msg = 'Vector string representations should match.';
+    const msg = 'Vector string representations should match.';
     
-    assert.equal(two.toString(),
-                 '<0, 1>',
-                 msg);
-    two.brackets = '()';
-    assert.equal(two.toString(),
-                 '(0, 1)',
-                 msg);
-    two.brackets = '[]';
-    assert.equal(two.toString(),
-                 '[0, 1]',
-                 msg);
-    two.brackets = '{}';
-    assert.equal(two.toString(),
-                 '{0, 1}',
-                 msg);
-    two.brackets = '<|';
-    assert.equal(two.toString(),
-                 '<0, 1|',
-                 msg);
-    two.brackets = '|>';
-    assert.equal(two.toString(),
-                 '|0, 1>',
-                 msg);
+    assert.equal(two.toString(), '<0, 1>', msg);
 
-    assert.equal(three.toString(),
-                 '<0, 0, 1>',
-                 msg);
+    two.brackets = '()';
+    assert.equal(two.toString(), '(0, 1)', msg);
+
+    two.brackets = '[]';
+    assert.equal(two.toString(), '[0, 1]', msg);
+
+    two.brackets = '{}';
+    assert.equal(two.toString(), '{0, 1}', msg);
+
+    two.brackets = '<|';
+    assert.equal(two.toString(), '<0, 1|', msg);
+
+    two.brackets = '|>';
+    assert.equal(two.toString(), '|0, 1>', msg);
+
+    assert.equal(three.toString(), '<0, 0, 1>', msg);
+
     three.brackets = '()';
-    assert.equal(three.toString(),
-                 '(0, 0, 1)',
-                 msg);
+    assert.equal(three.toString(), '(0, 0, 1)', msg);
+
     three.brackets = '[]';
-    assert.equal(three.toString(),
-                 '[0, 0, 1]',
-                 msg);
+    assert.equal(three.toString(), '[0, 0, 1]', msg);
+
     three.brackets = '{}';
-    assert.equal(three.toString(),
-                 '{0, 0, 1}',
-                 msg);
+    assert.equal(three.toString(), '{0, 0, 1}', msg);
+
     three.brackets = '<|';
-    assert.equal(three.toString(),
-                 '<0, 0, 1|',
-                 msg);
+    assert.equal(three.toString(), '<0, 0, 1|', msg);
+
     three.brackets = '|>';
-    assert.equal(three.toString(),
-                 '|0, 0, 1>',
-                 msg);
+    assert.equal(three.toString(), '|0, 0, 1>', msg);
 
     done();
   });
