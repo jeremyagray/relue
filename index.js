@@ -13,4 +13,5 @@
 
 exports.math = require('./lib/relue/math/index.js');
 exports.object = require('./lib/relue/object/index.js');
-exports.text = require('./lib/relue/text/index.js');
+exports.str = require('./lib/relue/str/index.js');
+exports.validation = require('./lib/relue/validation/index.js');

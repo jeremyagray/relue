@@ -5,64 +5,94 @@ const assert = chai.assert;
 
 const relue = require('../../../index.js');
 
-suite('relue.text.maybeMongoObjectId()', function() {
-  test('relue.text.maybeMongoObjectId() is a function', function(done) {
-    assert.equal(typeof relue.text.maybeMongoObjectId, 'function', 'relue.text.maybeMongoObjectId should be a function.');
+suite('relue.validation.maybeMongoObjectId()', function() {
+  test('maybeMongoObjectId() is a function', function(done) {
+    assert.equal(
+      typeof relue.validation.maybeMongoObjectId,
+      'function',
+      'maybeMongoObjectId should be a function.');
+
     done();
   });
 
-  test('relue.text.maybeMongoObjectId(), invalid id, null', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId(null));
+  test('maybeMongoObjectId(), invalid id, null',
+       function(done) {
+         assert.isFalse(relue.validation.maybeMongoObjectId(null));
+
+         done();
+       });
+
+  test('maybeMongoObjectId(), invalid id, undefined',
+       function(done) {
+         assert.isFalse(relue.validation.maybeMongoObjectId(undefined));
+
+         done();
+       });
+
+  test('maybeMongoObjectId(), invalid id, empty string',
+       function(done) {
+         assert.isFalse(relue.validation.maybeMongoObjectId(''));
+
+         done();
+       });
+
+  test('maybeMongoObjectId(), invalid id, integer', function(done) {
+    assert.isFalse(relue.validation.maybeMongoObjectId(Math.random()));
     done();
   });
 
-  test('relue.text.maybeMongoObjectId(), invalid id, undefined', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId(undefined));
+  test('maybeMongoObjectId(), invalid id, date', function(done) {
+    assert.isFalse(relue.validation.maybeMongoObjectId(new Date()));
     done();
   });
 
-  test('relue.text.maybeMongoObjectId(), invalid id, empty string', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId(''));
-    done();
-  });
+  test('maybeMongoObjectId(), invalid id, valid characters, too short',
+       function(done) {
+         assert.isFalse(relue.validation.maybeMongoObjectId('11'));
 
-  test('relue.text.maybeMongoObjectId(), invalid id, integer', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId(Math.random()));
-    done();
-  });
+         done();
+       });
 
-  test('relue.text.maybeMongoObjectId(), invalid id, date', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId(new Date()));
-    done();
-  });
+  test('maybeMongoObjectId(), invalid id, invalid characters, too short',
+       function(done) {
+         assert.isFalse(relue
+           .validation
+           .maybeMongoObjectId('notvalididnotvalidid'));
 
-  test('relue.text.maybeMongoObjectId(), invalid id, valid characters, too short', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId('11'));
-    done();
-  });
+         done();
+       });
 
-  test('relue.text.maybeMongoObjectId(), invalid id, invalid characters, too short', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId('notvalididnotvalidid'));
-    done();
-  });
+  test('maybeMongoObjectId(), invalid id, valid characters, too long',
+       function(done) {
+         assert.isFalse(relue
+           .validation
+           .maybeMongoObjectId('0123456789012345678901234'));
 
-  test('relue.text.maybeMongoObjectId(), invalid id, valid characters, too long', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId('0123456789012345678901234'));
-    done();
-  });
+         done();
+       });
 
-  test('relue.text.maybeMongoObjectId(), invalid id, invalid characters, too long', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId('notvalididnotvalididnotvalidid'));
-    done();
-  });
+  test('maybeMongoObjectId(), invalid id, invalid characters, too long',
+       function(done) {
+         assert.isFalse(relue.
+           validation
+           .maybeMongoObjectId('notvalididnotvalididnotvalidid'));
 
-  test('relue.text.maybeMongoObjectId(), invalid id, invalid characters, just right', function(done) {
-    assert.isFalse(relue.text.maybeMongoObjectId('notvalididnotvalididnotv'));
-    done();
-  });
+         done();
+       });
 
-  test('relue.text.maybeMongoObjectId() on valid id', function(done) {
-    assert.isTrue(relue.text.maybeMongoObjectId('5f821b527ed9c0024ef7e828'));
+  test('maybeMongoObjectId(), invalid id, invalid characters, just right',
+       function(done) {
+         assert.isFalse(relue
+           .validation
+           .maybeMongoObjectId('notvalididnotvalididnotv'));
+
+         done();
+       });
+
+  test('maybeMongoObjectId() on valid id', function(done) {
+    assert.isTrue(relue
+      .validation.maybeMongoObjectId('5f821b527ed9c0024ef7e828'));
+
     done();
   });
 });
