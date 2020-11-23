@@ -2,7 +2,7 @@
   "name": "relue",
   "homepage": "https://github.com/jeremyagray/relue",
   "author": "Jeremy A Gray <jeremy.a.gray@gmail.com> (http://www.grayfarms.org/)",
-  "version": "0.0.1",
+  "version": "0.4.0",
   "description": "Small helper functions for Euler projects, Rosetta Code, text, math, and more.",
   "main": "index.js",
   "scripts": {
