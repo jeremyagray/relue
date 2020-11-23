@@ -8,7 +8,6 @@
  * relue
  *
  * @module relue
- * @namespace relue
  */
 
 exports.math = require('./lib/relue/math/index.js');
